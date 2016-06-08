@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ABB.c">
+    <Files>
+      <File FileName="main.c" Line="3" Column="15" />
+      <File FileName="ABB.h" Line="3" Column="1" />
+      <File FileName="ABB_priv.h" Line="6" Column="2" />
+      <File FileName="ABB.c" Line="4" Column="1" />
+      <File FileName="ABB_priv.c" Line="5" Column="13" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
