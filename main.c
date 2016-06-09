@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "ABB.h"
 
+typedef struct reg {
+	int oi, seila;
+} Registro;
+
 void menu();
 
 int main (void){
@@ -12,7 +16,30 @@ int main (void){
 	return 0;
 }
 
+void JustFacaIt(void *data_void){
+	Registro* reg = (Registro*)data_void;
+	printf("[%d] -> %d", reg->oi, reg->seila);
+}
+int JustComparaIt(void *a, void *b){
+	Registro *regA = (Registro*)a,
+		*regB = (Registro*)b;
+	
+	if (regA->oi == regB->oi)
+		return IG;
+		
+	return (regA->oi > regB->oi) ? GT : LT;
+}	
+
 void menu(){
+	
+	ABB* arvore = cria_abb(sizeof(Registro));
+	Registro reg[10];
+	int i = 10;
+	while (--i){
+		reg[i].oi = i;
+		reg[i].seila = rand() % 500;
+	}
+	puts ("Arvore criada!");
 MENU:
     printf("Selecione a opcao:\
            \n1.\tCarregar arquivo.\
@@ -36,7 +63,14 @@ MENU:
             
             break;
         case 4:
-            
+        	puts("Que numero?");
+        	int op;
+        	scanf("%d", &op);
+        	printf("Iremos inserir o registro de numero %d de %d - %d\n", op, reg[op].oi, reg[op].seila);
+            inserir_abb(arvore, &reg[op], JustComparaIt);
+            puts("Criado");
+            mostrar_abb(arvore, JustFacaIt);
+            goto MENU;
             break;
         case 5:
             

@@ -1,2 +1,4 @@
-/home/marlon/EDAFinal/bin/Debug/ABB_priv.o: \
- /home/marlon/EDAFinal/ABB_priv.c /home/marlon/EDAFinal/ABB_priv.h
+/home/marlon/Git/GIT/hub/BCC/EDA/bin/Debug/ABB_priv.o: \
+ /home/marlon/Git/GIT/hub/BCC/EDA/ABB_priv.c \
+ /home/marlon/Git/GIT/hub/BCC/EDA/ABB.h \
+ /home/marlon/Git/GIT/hub/BCC/EDA/ABB_priv.h
