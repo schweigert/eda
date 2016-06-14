@@ -2,14 +2,26 @@
 #include <stdlib.h>
 #include "ABB.h"
 
-typedef struct reg {
-	int oi, seila;
+#define tamString 100
+
+
+typedef struct {
+    int matricula;
+    char nome[tamString];
+    int telefone;
+    float salario;
+    int idade;
+    char departamento[tamString];
 } Registro;
 
 void menu();
 
 int main (void){
 	const char* file = "Arq.txt";
+    
+    while (){
+        
+    }
     
     menu();
     

@@ -25,4 +25,6 @@ void inserir_abb(ABB* abb,void* dado, COMP(*comp)(void*,void*) ){
 	} else {
 		inserir_node(node, abb->raiz, comp);
 	}
+    
+    fb(abb->raiz);
 }

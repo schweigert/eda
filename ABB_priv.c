@@ -9,6 +9,7 @@ Node* criar_node(unsigned int tam){
 	ret->dado = malloc(tam);
 	ret->dir = NULL;
 	ret->esq = NULL;
+    ret->fb = 0;
 	return ret;
 }
 
@@ -25,7 +26,7 @@ void mostrar_node(Node* node, unsigned int camada, void (*impressao)(void*) ){
 		return;	
 	}
 	impressao(node->dado);
-	printf (":\n");
+	printf (" :(%d)\n", node->fb);
 		mostrar_node(node->dir, camada+1, impressao);
 		mostrar_node(node->esq, camada+1, impressao);
 }
@@ -41,7 +42,7 @@ void inserir_node(Node* node,Node* local, COMP(*comp)(void*,void*)){
 	if (resp == GT){
 		if (local->dir == NULL){
 			local->dir = node;
-			return;
+			//return;
 		} else {
 			inserir_node(node, local->dir, comp);
 			lado = 'd';
@@ -49,7 +50,7 @@ void inserir_node(Node* node,Node* local, COMP(*comp)(void*,void*)){
 	} else if (resp == LT){
 		if (local->esq == NULL){
 			local->esq = node;
-			return;
+			//return;
 		} else {
 			inserir_node(node, local->esq, comp);
 			lado = 'e';
@@ -58,37 +59,14 @@ void inserir_node(Node* node,Node* local, COMP(*comp)(void*,void*)){
 		puts("Internal error: EQUAL REGISTER");
 		return;
 	}
-	int FB = fb(local->esq) - fb(local->dir);
 	
-	Node* temp;
-	
-	if((FB == 2 || FB == -2) && lado == 'd'){
-		temp = swapRR(local);
-		local->dir = temp->dir;
-		local->esq = temp->esq;
-		local->dado = temp->dado;
-	}
-	
-	if((FB == 2 || FB == -2) && lado == 'e'){
-		temp = swapLL(local);
-		local->dir = temp->dir;
-		local->esq = temp->esq;
-		local->dado = temp->dado;
-	}
-	
-	if((FB == 2 || FB == -2) && lado == 'd'){
-		temp = swapRR(local);
-		local->dir = temp->dir;
-		local->esq = temp->esq;
-		local->dado = temp->dado;
-	}
-	
+	Node* temp = NULL;
 	
 }
 
 Node* swapRR (Node* p){
 	Node* q = p->dir,
-		  temp = q->esq;
+		  *temp = q->esq;
 		  
 	q->esq = p;
 	p->dir = temp;
@@ -97,10 +75,10 @@ Node* swapRR (Node* p){
 
 Node* swapLL (Node* p){
 	Node* q = p->esq,
-		  tmp = q->dir;
+		  *tmp = q->dir;
 		  
 	q->dir = p;
-	p->esq = temp;
+	p->esq = tmp;
 	
 	return (q);
 }
@@ -112,7 +90,7 @@ Node* swapRL (Node* p){
 	return (raiz);
 }
 
-Node* swapLR(p){
+Node* swapLR(Node* p){
 	Node* q=p->esq;
 	swapRR(q);
 	Node* raiz = swapLL(p);
@@ -123,11 +101,15 @@ int fb (Node* node) {
 	
 	int dir = 0, esq = 0;
 	
+    if (node == NULL) return 0;
+    
 	if (node->dir != NULL)
 		dir = 1 + fb(node->dir);
 	if (node->esq != NULL)
-		esq = 1 + fib(node->esq);
-		
+		esq = 1 + fb(node->esq);
+    
+    node->fb = esq - dir;
+    
 	return (dir > esq) ? dir : esq;
 	
 }

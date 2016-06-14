@@ -1,14 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ABB_priv.c">
+  <MonoDevelop.Ide.Workbench ActiveDocument="main.c">
     <Files>
-      <File FileName="ABB.h" Line="21" Column="50" />
-      <File FileName="ABB.c" Line="16" Column="14" />
-      <File FileName="ABB_priv.h" Line="24" Column="61" />
-      <File FileName="ABB_priv.c" Line="79" Column="23" />
-      <File FileName="main.c" Line="21" Column="20" />
+      <File FileName="main.c" Line="12" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

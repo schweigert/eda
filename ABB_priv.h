@@ -16,6 +16,7 @@ typedef struct Node {
 	void* dado;
 	struct Node* dir;
 	struct Node* esq;
+    int fb;
 
 } Node;
 
