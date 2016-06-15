@@ -4,7 +4,6 @@
 
 #define tamString 100
 
-
 typedef struct {
     int matricula;
     char nome[tamString];
@@ -14,13 +13,38 @@ typedef struct {
     char departamento[tamString];
 } Registro;
 
+Registro* registros;
+
 void menu();
+void JustFacaIt(void*);
 
 int main (void){
 	const char* file = "Arq.txt";
+    FILE *fd = fopen("coisa.txt", "w");
+    fprintf(fd, "Wooooooo");
+    fclose(fd);
+    FILE *f = fopen(file, "r");
     
-    while (){
-        
+    registros = (Registro*) malloc(10000 * sizeof &registros);
+    
+    if (!f){
+        printf("Falha ao ler o arquivo %s\n", file);
+        return 1;
+    }
+    int i = 10000;
+    while (i--){
+        Registro tmp;
+        fscanf(f, "%d", &tmp.matricula);
+        fscanf(f, "%s", &tmp.nome);
+        fscanf(f, "%d", &tmp.telefone);
+        fscanf(f, "%f", &tmp.salario);
+        fscanf(f, "%d", &tmp.idade);
+        fscanf(f, "%s", &tmp.departamento);
+        char * lixo;
+        fscanf(f, "%s", &lixo);
+        JustFacaIt(&tmp);
+        puts("");
+        registros[i] = tmp;
     }
     
     menu();
@@ -30,27 +54,27 @@ int main (void){
 
 void JustFacaIt(void *data_void){
 	Registro* reg = (Registro*)data_void;
-	printf("[%d] -> %d", reg->oi, reg->seila);
+	printf("[%d] -> {Nome: %s, Dep: %s, Fone: %d, Salario: %f, Idade: %d}", reg->matricula,
+           reg->nome,
+           reg->departamento,
+           reg->telefone,
+           reg->salario,
+           reg->idade);
 }
 int JustComparaIt(void *a, void *b){
 	Registro *regA = (Registro*)a,
 		*regB = (Registro*)b;
 	
-	if (regA->oi == regB->oi)
+	if (regA->matricula == regB->matricula)
 		return IG;
 		
-	return (regA->oi > regB->oi) ? GT : LT;
+	return (regA->matricula > regB->matricula) ? GT : LT;
 }	
 
 void menu(){
 	
 	ABB* arvore = cria_abb(sizeof(Registro));
-	Registro reg[10];
-	int i = 10;
-	while (--i){
-		reg[i].oi = i;
-		reg[i].seila = rand() % 500;
-	}
+
 	puts ("Arvore criada!");
 MENU:
     printf("Selecione a opcao:\
@@ -78,8 +102,8 @@ MENU:
         	puts("Que numero?");
         	int op;
         	scanf("%d", &op);
-        	printf("Iremos inserir o registro de numero %d de %d - %d\n", op, reg[op].oi, reg[op].seila);
-            inserir_abb(arvore, &reg[op], JustComparaIt);
+        	printf("Iremos inserir o registro de numero %d de [%d] - %s\n", op, registros[op].matricula, registros[op].nome);
+            inserir_abb(arvore, &registros[op], JustComparaIt);
             puts("Criado");
             mostrar_abb(arvore, JustFacaIt);
             goto MENU;
