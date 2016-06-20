@@ -4,7 +4,6 @@
 #include "avl_priv.h"
 
 
-
 // função para pegar a altura do Nó
 int altura(struct NoAVL *N)
 {
@@ -20,7 +19,7 @@ int max(int a, int b)
 }
  
 // Função para criar um novo nó
-struct NoAVL* criarNo(Dado *registro)
+struct NoAVL* criarNo(int registro)
 {
     struct NoAVL* NoAVL = (struct NoAVL*)
                         malloc(sizeof(struct NoAVL));
@@ -76,13 +75,13 @@ int fb(struct NoAVL *N)
 }
  
 // Insere um novo nó na árvore
-struct NoAVL* inserirNo(struct NoAVL* NoAVL, Dado* registro)
+struct NoAVL* inserirNo(struct NoAVL* NoAVL, int registro)
 {
     /* 1.  Efetua a rotação comum */
     if (NoAVL == NULL)
         return(criarNo(registro));
  
-    if (registro->chave < NoAVL->registro->chave)
+    if (registro < NoAVL->registro)
         NoAVL->dir  = inserirNo(NoAVL->dir, registro);
     else
         NoAVL->esq = inserirNo(NoAVL->esq, registro);
@@ -96,22 +95,22 @@ struct NoAVL* inserirNo(struct NoAVL* NoAVL, Dado* registro)
     // Realizar as rotações
  
     // DD
-    if (balance > 1 && registro->chave < NoAVL->dir->registro->chave)
+    if (balance > 1 && registro < NoAVL->dir->registro)
         return esqRotate(NoAVL);
  
     // EE
-    if (balance < -1 && registro->chave > NoAVL->esq->registro->chave)
+    if (balance < -1 && registro > NoAVL->esq->registro)
         return dirRotate(NoAVL);
  
     // DE
-    if (balance > 1 && registro->chave > NoAVL->dir->registro->chave)
+    if (balance > 1 && registro > NoAVL->dir->registro)
     {
         NoAVL->dir =  dirRotate(NoAVL->dir);
         return esqRotate(NoAVL);
     }
  
     // ED
-    if (balance < -1 && registro->chave < NoAVL->esq->registro->chave)
+    if (balance < -1 && registro < NoAVL->esq->registro)
     {
         NoAVL->esq = esqRotate(NoAVL->esq);
         return dirRotate(NoAVL);
@@ -134,17 +133,17 @@ struct NoAVL * menorValor(struct NoAVL* N)
 }
  
 // Deletar No
-struct NoAVL* deletarNo(struct NoAVL* root, Dado* registro)
+struct NoAVL* deletarNo(struct NoAVL* root, int registro)
 {
     // STEP 1: Verifica se a ROOT é nulo
  
     if (root == NULL)
         return root;
     // Buscar na subarvore
-    if ( registro->chave < root->registro->chave )
+    if ( registro < root->registro )
         root->dir = deletarNo(root->dir, registro);
 
-    else if( registro->chave > root->registro->chave )
+    else if( registro > root->registro )
         root->esq = deletarNo(root->esq, registro);
  
     // se está aqui?
@@ -219,7 +218,7 @@ void exibirArvore (struct NoAVL* N, int level){
         printf ("nil;\n");
         return;
     }
-    printf ("| %d:\n", N->registro->chave);
+    printf ("| %d:\n", N->registro);
     exibirArvore(N->dir, level + 1);
     exibirArvore(N->esq, level + 1);
     
@@ -230,7 +229,7 @@ void inOrder(struct NoAVL *root)
 {
     if(root != NULL)
     {
-        printf("%d ", root->registro->chave);
+        printf("%d ", root->registro);
         inOrder(root->dir);
         inOrder(root->esq);
     }

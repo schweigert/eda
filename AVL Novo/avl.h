@@ -1,5 +1,3 @@
-#include "avl_priv.h"
-
 typedef struct {
 
     NoAVL* root;
@@ -8,6 +6,7 @@ typedef struct {
 
 typedef struct {
 
-    int chave;
+    int registro;
+    char* academico;
 
 } Dado;
