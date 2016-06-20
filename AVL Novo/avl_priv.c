@@ -75,16 +75,16 @@ int fb(struct NoAVL *N)
 }
  
 // Insere um novo nó na árvore
-struct NoAVL* inserir(struct NoAVL* NoAVL, int registro)
+struct NoAVL* inserirNo(struct NoAVL* NoAVL, int registro)
 {
     /* 1.  Efetua a rotação comum */
     if (NoAVL == NULL)
         return(criarNo(registro));
  
     if (registro < NoAVL->registro)
-        NoAVL->dir  = inserir(NoAVL->dir, registro);
+        NoAVL->dir  = inserirNo(NoAVL->dir, registro);
     else
-        NoAVL->esq = inserir(NoAVL->esq, registro);
+        NoAVL->esq = inserirNo(NoAVL->esq, registro);
  
     /* 2. Atualiza a altura dos filhos */
     NoAVL->altura = max(altura(NoAVL->dir), altura(NoAVL->esq)) + 1;
@@ -234,52 +234,49 @@ void inOrder(struct NoAVL *root)
         inOrder(root->esq);
     }
 }
- 
-/* Teste da estrutura de dados */
+
+// Teste da estrutura de dados
 int main()
 {
   struct NoAVL *root = NULL;
- 
-  /* Constructing tree given in the above figure */
-    root = inserir(root, 9);
-    root = inserir(root, 5);
-    root = inserir(root, 10);
-    root = inserir(root, 0);
-    root = inserir(root, 6);
-    root = inserir(root, 11);
-    root = inserir(root, -1);
-    root = inserir(root, 1);
-    root = inserir(root, 2);
+
+    root = inserirNo(root, 9);
+    root = inserirNo(root, 5);
+    root = inserirNo(root, 10);
+    root = inserirNo(root, 0);
+    root = inserirNo(root, 6);
+    root = inserirNo(root, 11);
+    root = inserirNo(root, -1);
+    root = inserirNo(root, 1);
+    root = inserirNo(root, 2);
 
     exibirArvore(root, 0);
  
-    /* The constructed AVL Tree would be
-            9
-           /  \
-          1    10
-        /  \     \
-       0    5     11
-      /    /  \
-     -1   2    6
-    */
+    
+ //           9
+ //          /  \
+ //         1    10
+ //       /  \     \
+ //      0    5     11
+ //     /    /  \
+ //    -1   2    6
+    
  
-    printf("Pre order traversal of the constructed AVL tree is \n");
-    inOrder(root);
+    puts("");
+    puts("");
  
     root = deletarNo(root, 10);
  
-    /* The AVL Tree after deletion of 10
-            1
-           /  \
-          0    9
-        /     /  \
-       -1    5     11
-           /  \
-          2    6
-    */
- 
-    printf("\nPre order traversal after deletion of 10 \n");
-    inOrder(root);
-    puts ("");
+    
+//            1
+//           /  \
+//          0    9
+//        /     /  \
+//       -1    5     11
+//           /  \
+//          2    6
+    
+    exibirArvore(root, 0);
     return 0;
 }
+
