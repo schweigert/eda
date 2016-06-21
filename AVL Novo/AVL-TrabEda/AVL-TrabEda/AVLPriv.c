@@ -242,12 +242,16 @@ void inOrder(NoAVL *root)
 
 Dado* buscarInterno(NoAVL* local, int chave){
     
+
+    
+    
     if (local == NULL) return NULL;
+    
     
     if (local->registro->matricula == chave)
         return local->registro;
     
-    if (local->registro->matricula < chave)
+    if (local->registro->matricula > chave)
         return buscarInterno(local->dir, chave);
     else
         return buscarInterno(local->esq, chave);

@@ -16,6 +16,7 @@ typedef struct dado {
     float salario;
     int codDep;
     char departamento[256];
+    unsigned long long int index;
 } Dado;
 
 typedef struct NoAVL
@@ -26,10 +27,6 @@ typedef struct NoAVL
     int altura;
     
 } NoAVL;
-
-typedef struct arvore {
-    NoAVL* root;
-} Arvore;
 
 int altura(NoAVL *N);
 int max(int a, int b);
@@ -43,5 +40,6 @@ NoAVL* deletarNo(NoAVL* root, int registro);
 void exibirArvore (NoAVL* N, int level);
 void inOrder(NoAVL *root);
 Dado* buscarInterno(NoAVL* local, int chave);
+
 
 #endif /* AVLPriv_h */

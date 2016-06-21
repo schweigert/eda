@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		840475A51D1961840000965D /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 840475A41D1961840000965D /* main.c */; };
-		840475AD1D19620F0000965D /* avl_priv.c in Sources */ = {isa = PBXBuildFile; fileRef = 840475AB1D19620F0000965D /* avl_priv.c */; };
 		840475B01D19624E0000965D /* avl.c in Sources */ = {isa = PBXBuildFile; fileRef = 840475AE1D19624E0000965D /* avl.c */; };
 		840475B31D196ACD0000965D /* AVLPriv.c in Sources */ = {isa = PBXBuildFile; fileRef = 840475B11D196ACD0000965D /* AVLPriv.c */; };
+		84E142C11D19C11200FCD5FA /* funcoes_programa.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E142BF1D19C11200FCD5FA /* funcoes_programa.c */; };
+		84E142C41D19C52B00FCD5FA /* fileManager.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E142C21D19C52B00FCD5FA /* fileManager.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,12 +29,14 @@
 /* Begin PBXFileReference section */
 		840475A11D1961840000965D /* AVL-TrabEda */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "AVL-TrabEda"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840475A41D1961840000965D /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; usesTabs = 1; };
-		840475AB1D19620F0000965D /* avl_priv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = avl_priv.c; sourceTree = "<group>"; };
-		840475AC1D19620F0000965D /* avl_priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avl_priv.h; sourceTree = "<group>"; };
 		840475AE1D19624E0000965D /* avl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = avl.c; sourceTree = "<group>"; };
 		840475AF1D19624E0000965D /* avl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avl.h; sourceTree = "<group>"; };
 		840475B11D196ACD0000965D /* AVLPriv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AVLPriv.c; sourceTree = "<group>"; };
 		840475B21D196ACD0000965D /* AVLPriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVLPriv.h; sourceTree = "<group>"; };
+		84E142BF1D19C11200FCD5FA /* funcoes_programa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = funcoes_programa.c; sourceTree = "<group>"; };
+		84E142C01D19C11200FCD5FA /* funcoes_programa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = funcoes_programa.h; sourceTree = "<group>"; };
+		84E142C21D19C52B00FCD5FA /* fileManager.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fileManager.c; sourceTree = "<group>"; };
+		84E142C31D19C52B00FCD5FA /* fileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,12 +70,14 @@
 			isa = PBXGroup;
 			children = (
 				840475A41D1961840000965D /* main.c */,
-				840475AB1D19620F0000965D /* avl_priv.c */,
-				840475AC1D19620F0000965D /* avl_priv.h */,
 				840475AE1D19624E0000965D /* avl.c */,
 				840475AF1D19624E0000965D /* avl.h */,
 				840475B11D196ACD0000965D /* AVLPriv.c */,
 				840475B21D196ACD0000965D /* AVLPriv.h */,
+				84E142BF1D19C11200FCD5FA /* funcoes_programa.c */,
+				84E142C01D19C11200FCD5FA /* funcoes_programa.h */,
+				84E142C21D19C52B00FCD5FA /* fileManager.c */,
+				84E142C31D19C52B00FCD5FA /* fileManager.h */,
 			);
 			path = "AVL-TrabEda";
 			sourceTree = "<group>";
@@ -134,9 +139,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				840475B01D19624E0000965D /* avl.c in Sources */,
-				840475AD1D19620F0000965D /* avl_priv.c in Sources */,
 				840475B31D196ACD0000965D /* AVLPriv.c in Sources */,
 				840475A51D1961840000965D /* main.c in Sources */,
+				84E142C11D19C11200FCD5FA /* funcoes_programa.c in Sources */,
+				84E142C41D19C52B00FCD5FA /* fileManager.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +263,7 @@
 				840475AA1D1961840000965D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

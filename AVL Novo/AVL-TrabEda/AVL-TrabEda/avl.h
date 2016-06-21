@@ -4,6 +4,10 @@
 //#include "avl_priv.h"
 #include "AVLPriv.h"
 
+typedef struct arvore {
+    NoAVL* root;
+} Arvore;
+
 Dado* buscarDado(Arvore* arvore,int chave);
 void mostrarArvore(Arvore* arvore);
 void removerArvore(Arvore* arvore, Dado* valor);
