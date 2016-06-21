@@ -4,6 +4,7 @@
 #include "avl.h"
 
 int main (void) {
+    
     Arvore* arvore = criaArvore();
     FILE *fdm = fopen("Arq.txt","r");
     int mat;
@@ -12,6 +13,7 @@ int main (void) {
     float salario;
     char dep[256];
     int i = 0;
+
     while ( fscanf(fdm, "%d %s %d %f %d %s #",&mat, &nome, &telefone, &salario, &dep) != EOF ){
         Dado* dado = criarDado();
         dado->matricula = mat;
