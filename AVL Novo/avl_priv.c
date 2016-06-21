@@ -4,6 +4,15 @@
 #include "avl_priv.h"
 #include "avl.h"
 
+// Arvore
+struct NoAVL
+{
+    Dado* registro;
+    struct NoAVL *dir;
+    struct NoAVL *esq;
+    int altura;
+};
+
 // função para pegar a altura do Nó
 int altura(struct NoAVL *N)
 {
@@ -235,7 +244,7 @@ void inOrder(struct NoAVL *root)
 }
 
 
-Dado* buscarInterno(NoAVL* local, int chave){
+Dado* buscarInterno(struct NoAVL* local, int chave){
 
     if (local == NULL) return NULL;
 

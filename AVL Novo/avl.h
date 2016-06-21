@@ -1,4 +1,5 @@
-#include "avl_priv.h"
+#ifndef __avl__
+#define __avl__
 
 typedef struct {
     NoAVL* root;
@@ -23,3 +24,5 @@ void inserirArvore(Arvore* arvore,Dado* valor);
 void removerArvore(Arvore* arvore, Dado* valor);
 void mostrarArvore(Arvore* arvore);
 Dado* buscarDado(Arvore* arvore,int chave);
+
+#endif

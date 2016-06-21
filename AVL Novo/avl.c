@@ -3,6 +3,18 @@
 #include "avl.h"
 #include "avl_priv.h"
 
+typedef struct {
+    NoAVL* root;
+} Arvore;
+
+typedef struct {
+    int matricula;
+    char nome[256];
+    int telefone;
+    float salario;
+    char departamento[256];
+} Dado;
+
 Dado* criarDado(){
     return (Dado*)malloc(sizeof(Dado));
 }
