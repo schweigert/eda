@@ -150,6 +150,8 @@ MENU:
 			salvarArvore(arvore, "Coisa.txt");
 			goto MENU;
 			break;
+		case 8:
+			break;
 			
   default:
 			printf("Opção invalida!\n");
