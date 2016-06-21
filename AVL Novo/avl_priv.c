@@ -81,7 +81,7 @@ struct NoAVL* inserirNo(struct NoAVL* NoAVL, Dado* registro)
     if (NoAVL == NULL)
         return(criarNo(registro));
  
-    if (registro->registro < NoAVL->registro->registro)
+    if (registro->matricula < NoAVL->registro->matricula)
         NoAVL->dir  = inserirNo(NoAVL->dir, registro);
     else
         NoAVL->esq = inserirNo(NoAVL->esq, registro);
@@ -95,22 +95,22 @@ struct NoAVL* inserirNo(struct NoAVL* NoAVL, Dado* registro)
     // Realizar as rotações
  
     // DD
-    if (balance > 1 && registro->registro < NoAVL->dir->registro->registro)
+    if (balance > 1 && registro->matricula < NoAVL->dir->registro->matricula)
         return esqRotate(NoAVL);
  
     // EE
-    if (balance < -1 && registro->registro > NoAVL->esq->registro->registro)
+    if (balance < -1 && registro->matricula > NoAVL->esq->registro->matricula)
         return dirRotate(NoAVL);
  
     // DE
-    if (balance > 1 && registro->registro > NoAVL->dir->registro->registro)
+    if (balance > 1 && registro->matricula > NoAVL->dir->registro->matricula)
     {
         NoAVL->dir =  dirRotate(NoAVL->dir);
         return esqRotate(NoAVL);
     }
  
     // ED
-    if (balance < -1 && registro->registro < NoAVL->esq->registro->registro)
+    if (balance < -1 && registro->matricula < NoAVL->esq->registro->matricula)
     {
         NoAVL->esq = esqRotate(NoAVL->esq);
         return dirRotate(NoAVL);
@@ -140,10 +140,10 @@ struct NoAVL* deletarNo(struct NoAVL* root, int registro)
     if (root == NULL)
         return root;
     // Buscar na subarvore
-    if ( registro->registro < root->registro->registro )
+    if ( registro->matricula < root->registro->matricula )
         root->dir = deletarNo(root->dir, registro);
 
-    else if( registro->registro > root->registro->registro )
+    else if( registro->matricula > root->registro->matricula )
         root->esq = deletarNo(root->esq, registro);
  
     // se está aqui?
@@ -217,7 +217,7 @@ void exibirArvore (struct NoAVL* N, int level){
         printf ("nil;\n");
         return;
     }
-    printf ("| %d:\n", N->registro->registro);
+    printf ("| %d:\n", N->registro->matricula);
     exibirArvore(N->dir, level + 1);
     exibirArvore(N->esq, level + 1);
     
@@ -228,7 +228,7 @@ void inOrder(struct NoAVL *root)
 {
     if(root != NULL)
     {
-        printf("%d ", root->registro->registro);
+        printf("%d ", root->registro->matricula);
         inOrder(root->dir);
         inOrder(root->esq);
     }
@@ -239,10 +239,10 @@ Dado* buscarInterno(NoAVL* local, int chave){
 
     if (local == NULL) return NULL;
 
-    if (local->registro->registro == chave) 
+    if (local->registro->matricula == chave) 
                         return local->registro;
     
-    if (local->registro->registro < chave)
+    if (local->registro->matricula < chave)
         buscarInterno(local->dir, chave);
     else
         buscarInterno(local->esq, chave);
