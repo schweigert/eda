@@ -2,7 +2,7 @@
 #include<stdlib.h>
  
 #include "avl_priv.h"
-
+#include "avl.h"
 
 // função para pegar a altura do Nó
 int altura(struct NoAVL *N)
@@ -19,7 +19,7 @@ int max(int a, int b)
 }
  
 // Função para criar um novo nó
-struct NoAVL* criarNo(int registro)
+struct NoAVL* criarNo(Dado* registro)
 {
     struct NoAVL* NoAVL = (struct NoAVL*)
                         malloc(sizeof(struct NoAVL));
@@ -75,13 +75,13 @@ int fb(struct NoAVL *N)
 }
  
 // Insere um novo nó na árvore
-struct NoAVL* inserirNo(struct NoAVL* NoAVL, int registro)
+struct NoAVL* inserirNo(struct NoAVL* NoAVL, Dado* registro)
 {
     /* 1.  Efetua a rotação comum */
     if (NoAVL == NULL)
         return(criarNo(registro));
  
-    if (registro < NoAVL->registro)
+    if (registro->registro < NoAVL->registro->registro)
         NoAVL->dir  = inserirNo(NoAVL->dir, registro);
     else
         NoAVL->esq = inserirNo(NoAVL->esq, registro);
@@ -95,22 +95,22 @@ struct NoAVL* inserirNo(struct NoAVL* NoAVL, int registro)
     // Realizar as rotações
  
     // DD
-    if (balance > 1 && registro < NoAVL->dir->registro)
+    if (balance > 1 && registro->registro < NoAVL->dir->registro->registro)
         return esqRotate(NoAVL);
  
     // EE
-    if (balance < -1 && registro > NoAVL->esq->registro)
+    if (balance < -1 && registro->registro > NoAVL->esq->registro->registro)
         return dirRotate(NoAVL);
  
     // DE
-    if (balance > 1 && registro > NoAVL->dir->registro)
+    if (balance > 1 && registro->registro > NoAVL->dir->registro->registro)
     {
         NoAVL->dir =  dirRotate(NoAVL->dir);
         return esqRotate(NoAVL);
     }
  
     // ED
-    if (balance < -1 && registro < NoAVL->esq->registro)
+    if (balance < -1 && registro->registro < NoAVL->esq->registro->registro)
     {
         NoAVL->esq = esqRotate(NoAVL->esq);
         return dirRotate(NoAVL);
@@ -140,10 +140,10 @@ struct NoAVL* deletarNo(struct NoAVL* root, int registro)
     if (root == NULL)
         return root;
     // Buscar na subarvore
-    if ( registro < root->registro )
+    if ( registro->registro < root->registro->registro )
         root->dir = deletarNo(root->dir, registro);
 
-    else if( registro > root->registro )
+    else if( registro->registro > root->registro->registro )
         root->esq = deletarNo(root->esq, registro);
  
     // se está aqui?
@@ -153,8 +153,7 @@ struct NoAVL* deletarNo(struct NoAVL* root, int registro)
         if( (root->dir == NULL) || (root->esq == NULL) )
         {
             struct NoAVL *temp = root->dir ? root->dir : root->esq;
- 
-            // No child case
+
             if(temp == NULL)
             {
                 temp = root;
@@ -218,7 +217,7 @@ void exibirArvore (struct NoAVL* N, int level){
         printf ("nil;\n");
         return;
     }
-    printf ("| %d:\n", N->registro);
+    printf ("| %d:\n", N->registro->registro);
     exibirArvore(N->dir, level + 1);
     exibirArvore(N->esq, level + 1);
     
@@ -229,54 +228,23 @@ void inOrder(struct NoAVL *root)
 {
     if(root != NULL)
     {
-        printf("%d ", root->registro);
+        printf("%d ", root->registro->registro);
         inOrder(root->dir);
         inOrder(root->esq);
     }
 }
 
-// Teste da estrutura de dados
-int main()
-{
-  struct NoAVL *root = NULL;
 
-    root = inserirNo(root, 9);
-    root = inserirNo(root, 5);
-    root = inserirNo(root, 10);
-    root = inserirNo(root, 0);
-    root = inserirNo(root, 6);
-    root = inserirNo(root, 11);
-    root = inserirNo(root, -1);
-    root = inserirNo(root, 1);
-    root = inserirNo(root, 2);
+Dado* buscarInterno(NoAVL* local, int chave){
 
-    exibirArvore(root, 0);
- 
+    if (local == NULL) return NULL;
+
+    if (local->registro->registro == chave) 
+                        return local->registro;
     
- //           9
- //          /  \
- //         1    10
- //       /  \     \
- //      0    5     11
- //     /    /  \
- //    -1   2    6
-    
- 
-    puts("");
-    puts("");
- 
-    root = deletarNo(root, 10);
- 
-    
-//            1
-//           /  \
-//          0    9
-//        /     /  \
-//       -1    5     11
-//           /  \
-//          2    6
-    
-    exibirArvore(root, 0);
-    return 0;
+    if (local->registro->registro < chave)
+        buscarInterno(local->dir, chave);
+    else
+        buscarInterno(local->esq, chave);
+
 }
-
