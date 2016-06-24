@@ -1,0 +1,264 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+\usepackage{tikz}
+\usepackage[brazil]{babel}   
+%\usepackage[latin1]{inputenc}  
+\usepackage[utf8]{inputenc}  
+% UTF-8 encoding is recommended by ShareLaTex
+
+     
+\sloppy
+
+\title{Estrutura de Dados \\ Relatório Final \\ Árvore Binária de Busca AVL}
+
+\author{Gustavo Diel\inst{1}, James Neuburger Gaston\inst{1}, Marlon Henry Schweigert\inst{1} }
+
+
+\address{Centro de Ciências Tecnológicas -- Universidade do Estado de Santa Catarina
+  (UDESC)\\
+  Joinville -- SC -- Brazil}
+
+
+\begin{document} 
+
+\maketitle
+
+     
+\begin{resumo} 
+  Este relatório descreve o funcionamento do algoritmo de árvore binária de busca AVL (balanceada), exigido pelo professor Doutor Gilmário Barbosa dos Santos como trabalho final da matéria de Estruturas de Dados de Bacharelado de Ciência da Computação.
+\end{resumo}
+
+
+\section{Introdução}
+
+O algoritmo em questão, tem por objetivo, facilitar a busca de dados que são manipulados dinamicamente, bem como inserção e remoção. O seu desenvolvimento foi realizado pelos acadêmicos com o objetivo de estudar o desempenho, viabilidade e praticidade para manipulação e busca de dados em quantidade massiva.
+
+\section{Algoritmo}
+
+Arvore AVL é uma árvore autobalanceada utilizada para otimizar busca de dados criada por Adelson Velsky e Landis em 1962.
+
+A árvore binária tem por regra básica que seu filho a direita sempre será menor que o pai; consecutivamente, seu filho a esquerda sempre será maior que o pai. Além disso, a árvore é uma árvore autobalanceada e possui uma característica para otimizar a busca: a maior altura pela esquerda não pode se diferenciar bruscamente da árvore a direita. Essa diferença não pode ser maior que 1 em módulo.
+
+Para manter o balanceamento da árvore, efetuamos as chamadas rotações. Basicamente, são duas rotações simples que existem. A exemplo, a rotação esquerda simples efetua o balanceamento se o filho e neto estão à direita e o seu fator de balanceamento portanto é igual a -2. Da mesma forma, existe a rotação direita que funciona de maneira semelhante, porém espelhado com  fator de balanceamento igual a 2.
+
+
+Rotação Esquerda Simples
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (26.5,-33.3) circle (3);
+\draw (26.5,-33.3) node {$A$};
+\draw [black] (22.7,-25.2) circle (3);
+\draw (22.7,-25.2) node {$B$};
+\draw [black] (30.5,-41.2) circle (3);
+\draw (30.5,-41.2) node {$C$};
+\draw [black] (23.97,-27.92) -- (25.23,-30.58);
+\fill [black] (25.23,-30.58) -- (25.34,-29.65) -- (24.43,-30.07);
+\draw [black] (27.86,-35.98) -- (29.14,-38.52);
+\fill [black] (29.14,-38.52) -- (29.23,-37.58) -- (28.34,-38.04);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (30.5,-23.3) circle (3);
+\draw (30.5,-23.3) node {$A$};
+\draw [black] (24,-31.6) circle (3);
+\draw (24,-31.6) node {$B$};
+\draw [black] (36.7,-31.6) circle (3);
+\draw (36.7,-31.6) node {$C$};
+\draw [black] (32.3,-25.7) -- (34.9,-29.2);
+\fill [black] (34.9,-29.2) -- (34.83,-28.26) -- (34.03,-28.85);
+\draw [black] (28.65,-25.66) -- (25.85,-29.24);
+\fill [black] (25.85,-29.24) -- (26.74,-28.92) -- (25.95,-28.3);
+\end{tikzpicture}
+\end{center}
+
+
+Rotação Direita Simples
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (26.5,-33.3) circle (3);
+\draw (26.5,-33.3) node {$A$};
+\draw [black] (32.4,-27) circle (3);
+\draw (32.4,-27) node {$B$};
+\draw [black] (20.7,-39.5) circle (3);
+\draw (20.7,-39.5) node {$C$};
+\draw [black] (30.35,-29.19) -- (28.55,-31.11);
+\fill [black] (28.55,-31.11) -- (29.46,-30.87) -- (28.73,-30.18);
+\draw [black] (24.45,-35.49) -- (22.75,-37.31);
+\fill [black] (22.75,-37.31) -- (23.66,-37.07) -- (22.93,-36.38);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (26.5,-33.3) circle (3);
+\draw (26.5,-33.3) node {$A$};
+\draw [black] (32.7,-39.5) circle (3);
+\draw (32.7,-39.5) node {$B$};
+\draw [black] (20.7,-39.5) circle (3);
+\draw (20.7,-39.5) node {$C$};
+\draw [black] (24.45,-35.49) -- (22.75,-37.31);
+\fill [black] (22.75,-37.31) -- (23.66,-37.07) -- (22.93,-36.38);
+\draw [black] (28.62,-35.42) -- (30.58,-37.38);
+\fill [black] (30.58,-37.38) -- (30.37,-36.46) -- (29.66,-37.17);
+\end{tikzpicture}
+\end{center}
+
+
+Outras formas de rotação são as rotações duplas. Neste caso a rotação esquerda dupla efetua o balanceamento se o filho está à direita e o neto à esquerda e o seu fator de balanceamento portanto é igual a -2, rotacionado primeiro o neto com o filho, caindo então no caso de rotação simples. Da mesma forma, existe a rotação direita dupla que funciona de maneira semelhante, porém espelhado com  fator de balanceamento igual a 2.
+
+
+Rotação Esquerda Dupla
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (31.6,-38.1) circle (3);
+\draw (31.6,-38.1) node {$A$};
+\draw [black] (26.8,-44.7) circle (3);
+\draw (26.8,-44.7) node {$B$};
+\draw [black] (26.8,-30.6) circle (3);
+\draw (26.8,-30.6) node {$C$};
+\draw [black] (28.42,-33.13) -- (29.98,-35.57);
+\fill [black] (29.98,-35.57) -- (29.97,-34.63) -- (29.13,-35.17);
+\draw [black] (29.84,-40.53) -- (28.56,-42.27);
+\fill [black] (28.56,-42.27) -- (29.44,-41.92) -- (28.63,-41.33);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (35.8,-47.3) circle (3);
+\draw (35.8,-47.3) node {$A$};
+\draw [black] (31.3,-38.7) circle (3);
+\draw (31.3,-38.7) node {$B$};
+\draw [black] (26.8,-30.6) circle (3);
+\draw (26.8,-30.6) node {$C$};
+\draw [black] (28.26,-33.22) -- (29.84,-36.08);
+\fill [black] (29.84,-36.08) -- (29.89,-35.14) -- (29.02,-35.62);
+\draw [black] (32.69,-41.36) -- (34.41,-44.64);
+\fill [black] (34.41,-44.64) -- (34.48,-43.7) -- (33.6,-44.16);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (39.9,-30.6) circle (3);
+\draw (39.9,-30.6) node {$A$};
+\draw [black] (34.1,-22.6) circle (3);
+\draw (34.1,-22.6) node {$B$};
+\draw [black] (29,-30.6) circle (3);
+\draw (29,-30.6) node {$C$};
+\draw [black] (35.86,-25.03) -- (38.14,-28.17);
+\fill [black] (38.14,-28.17) -- (38.07,-27.23) -- (37.26,-27.82);
+\draw [black] (32.49,-25.13) -- (30.61,-28.07);
+\fill [black] (30.61,-28.07) -- (31.46,-27.66) -- (30.62,-27.13);
+\end{tikzpicture}
+\end{center}
+
+Rotação Direita Dupla
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (30.5,-23.3) circle (3);
+\draw (30.5,-23.3) node {$A$};
+\draw [black] (24,-31.6) circle (3);
+\draw (24,-31.6) node {$B$};
+\draw [black] (30.5,-38.6) circle (3);
+\draw (30.5,-38.6) node {$C$};
+\draw [black] (28.65,-25.66) -- (25.85,-29.24);
+\fill [black] (25.85,-29.24) -- (26.74,-28.92) -- (25.95,-28.3);
+\draw [black] (26.04,-33.8) -- (28.46,-36.4);
+\fill [black] (28.46,-36.4) -- (28.28,-35.48) -- (27.55,-36.16);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (30.5,-23.3) circle (3);
+\draw (30.5,-23.3) node {$A$};
+\draw [black] (21.9,-38.1) circle (3);
+\draw (21.9,-38.1) node {$B$};
+\draw [black] (26.8,-30.6) circle (3);
+\draw (26.8,-30.6) node {$C$};
+\draw [black] (29.14,-25.98) -- (28.16,-27.92);
+\fill [black] (28.16,-27.92) -- (28.96,-27.44) -- (28.07,-26.98);
+\draw [black] (25.16,-33.11) -- (23.54,-35.59);
+\fill [black] (23.54,-35.59) -- (24.4,-35.19) -- (23.56,-34.65);
+\end{tikzpicture}
+\end{center}
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (31.6,-38.1) circle (3);
+\draw (31.6,-38.1) node {$A$};
+\draw [black] (21.9,-38.1) circle (3);
+\draw (21.9,-38.1) node {$B$};
+\draw [black] (26.8,-30.6) circle (3);
+\draw (26.8,-30.6) node {$C$};
+\draw [black] (25.16,-33.11) -- (23.54,-35.59);
+\fill [black] (23.54,-35.59) -- (24.4,-35.19) -- (23.56,-34.65);
+\draw [black] (28.42,-33.13) -- (29.98,-35.57);
+\fill [black] (29.98,-35.57) -- (29.97,-34.63) -- (29.13,-35.17);
+\end{tikzpicture}
+\end{center}
+
+
+\section{Aplicação}
+
+A aplicação requerida como trabalho necessita ler um arquivo, mapea-lo (index) e salvar os dados contidos na árvore. Após isso, será possível realizar as seguintes operações:
+
+\begin{enumerate}
+\item Buscar;
+\item Exibir registro completo;
+\item Remoção do Registro;
+\item Inserção de Registro;
+\item Tamanho do Arquivo;
+\item Salvar índice em Disco;
+\item Recuperar do índice a partir do Disco;
+
+\end{enumerate}
+
+
+\subsection{Buscar}
+
+Na aplicação, foram construídos dois tipos de busca, uma pelo índice e pela estrutura de dados salvo na árvore.
+
+Pela alternativa de exibir a linha do arquivo, é efetuado uma busca pela matrícula do funcionário, após isso buscando no arquivo pelo valor do seu índice.
+
+Pela alternativa de exibir o dado, é exibido o dado que está na árvore (Matrícula, salário, nome, telefone, etc...).
+
+\subsection{Remoção e Inserção do Registro}
+
+A inserção de um dado é feito diretamente na árvore. Após preenchido os dados requiridos no formulário, o método de inserção em árvore AVL insere a estrutura criada pela aplicação na Estrutura de Dados.
+
+A remoção de dados ocorre também pela TDA da árvore. Os dados são removidos da memória.
+
+\subsection{Salvar índice em Disco}
+
+Ao salvar a árvore em disco, estará alterando o arquivo de entrada de dados em forma "inOrder", otimizando o carregamento de dados sem necessitar as rotações na próxima inicialização.
+
+\section{Considerações Finais}
+
+O código se mostrou responsivo e eficaz para a resolução do problema proposto. O método "inOrder" para releitura da árvore mostrou-se eficiente ao inicializar a aplicação. 
+
+A Árvore AVL mostrou-se veloz em sua consulta e manipulação dos dados, mesmo sendo uma estrutura de dados complexa.
+
+\end{document}
